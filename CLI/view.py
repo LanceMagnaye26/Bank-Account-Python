@@ -20,7 +20,7 @@ class View():
         print('Pin has to have length of 4')
 
     def inc_pin_msg(self):
-        print('Incorrect pin. Please try again')
+        print('Incorrect pin. Please run again!')
 
     def no_user_msg(self):
         print('User does not exist')
