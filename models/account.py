@@ -50,14 +50,14 @@ class Account:
 
     @property
     def balance(self):
-        return 'The account balance of {} is: ${}'.format(self.name, self.acc_bal)
+        return self.acc_bal
 
     def __str__(self):
         return 'Name: {0}\nAccount Number: {1}\nAccount Balance: ${2}'.format(self.name, self.acc_num, self.acc_bal)
 
-    def change_name(self, new_name):
-        self.name = str(new_name)
-        return
+    # def change_name(self, new_name):
+    #     self.name = str(new_name)
+    #     return
 
     def show_transaction(self):
         print('\nAccount name: {}\nAccount number: {}'.format(self.name, self.acc_num))

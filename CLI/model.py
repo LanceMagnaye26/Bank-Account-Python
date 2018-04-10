@@ -51,6 +51,7 @@ class Model():
 
     def no_user_check(self, acc_num):
         self.read_file()
+        check = True
         for user in self.accounts:
             if user['Account Number'] == str(acc_num):
                 check = False
