@@ -35,16 +35,20 @@ class Bank:
     def verify(self):
         message = "Login SucessFull"
         messagebox._show("Login Info", message)
-        self.frame.destroy()
         self.MainMenu()
 
+
+    def Clear(self):
+        self.frame.destroy()
+
     def MainMenu(self):
+        self.Clear()
         self.frame = Frame(self.master, bg=self.color2, width=600, height=250)
         #make
         self.detailBut = Button(self.frame, text="Account Details", bg=self.color1, fg="white")
         self.logBut = Button(self.frame, text="Transaction Log", bg=self.color1, fg="white")
-        self.depositBut = Button(self.frame, text="Deposit Money", bg=self.color1, fg="white")
-        self.withdrawBut = Button(self.frame, text="Withdraw Money", bg=self.color1, fg="white")
+        self.depositBut = Button(self.frame, text="Deposit Money", bg=self.color1, fg="white", command=self.Deposit)
+        self.withdrawBut = Button(self.frame, text="Withdraw Money", bg=self.color1, fg="white" ,command=self.Withdraw)
         self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white", command=self.master.quit)
         #place
         self.detailBut.place(x=25, y=25, width=200, height=50)
@@ -55,10 +59,49 @@ class Bank:
         self.frame.pack()
 
     def Withdraw(self):
-        pass
+        self.Clear()
+        self.frame = Frame(self.master, bg=self.color2, width=600, height=250)
+        #master.geometry("800x400")
+        # make
+        self.Dbut20 = Button(self.frame, text="$20", bg=self.color1, fg="white")
+        self.Dbut40 = Button(self.frame, text="$40", bg=self.color1, fg="white")
+        self.Dbut60 = Button(self.frame, text="$60", bg=self.color1, fg="white")
+        self.Dbut80 = Button(self.frame, text="$80", bg=self.color1, fg="white")
+        self.Dbut100 = Button(self.frame, text="$100", bg=self.color1, fg="white")
+        self.Dbut150 = Button(self.frame, text="$150", bg=self.color1, fg="white")
+        self.Dbut200 = Button(self.frame, text="$200", bg=self.color1, fg="white")
+        self.DbutChoice = Button(self.frame, text="Other", bg=self.color1, fg="white")
+
+        self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white", command=self.master.quit)
+        self.backBut = Button(self.frame, text="Back", bg=self.color1, fg="white", command=self.MainMenu)
+        # place
+        self.Dbut20.place(x=25, y=60, width=200, height=30)
+        self.Dbut40.place(x=25, y=100, width=200, height=30)
+        self.Dbut60.place(x=25, y=140, width=200, height=30)
+        self.Dbut80.place(x=25, y=180, width=200, height=30)
+        self.Dbut100.place(x=375, y=60, width=200, height=30)
+        self.Dbut150.place(x=375, y=100, width=200, height=30)
+        self.Dbut200.place(x=375, y=140, width=200, height=30)
+        self.DbutChoice.place(x=375, y=180, width=200, height=30)
+
+        self.quitBut.place(x=25, y=10, width=100, height=25)
+        self.backBut.place(x=475, y=10, width=100, height=25)
+        self.frame.pack()
 
     def Deposit(self):
-        pass
+        self.Clear()
+        self.frame = Frame(self.master, bg=self.color2, width=600, height=250)
+        self.money_box = Entry(self.frame, bg="honeydew", highlightcolor=self.color1)
+        self.submitButton = Button(self.frame, text="Submit", bg=self.color1, fg="white")
+        self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white", command=self.master.quit)
+        self.backBut = Button(self.frame, text="Back", bg=self.color1, fg="white", command=self.MainMenu)
+        #place
+        self.money_box.place(x=200, y=100, width=200, height=20)
+        self.submitButton.place(x=445, y=100, width=55, height=20)
+        self.quitBut.place(x=25, y=10, width=100, height=25)
+        self.backBut.place(x=475, y=10, width=100, height=25)
+        #self.submitButton.bind("<Button-1>", self.deposit_trans)
+        self.frame.pack()
 
     def Logs(self):
         pass
