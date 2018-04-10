@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 
-class Bank:
+class ATM:
     def __init__(self,master):
         self.color1 = '#000447'
         self.color2 = '#e2fbff'
@@ -114,5 +114,5 @@ master.title("Sign In")
 #master.geometry("600x420")
 icon = PhotoImage(file="icon.png")
 master.tk.call("wm",'iconphoto',master._w,icon)
-obj = Bank(master)
+obj = ATM(master)
 master.mainloop()
