@@ -15,7 +15,7 @@ class Model():
             with open('CLI/accounts.csv', 'r') as open_f:
                 csv_reader = csv.DictReader(open_f)
                 for user in csv_reader:
-                    self.accounts[user['Account Number']] = {'First Name': user['First Name'], 'Last Name': user['Last Name'], 'PIN': user['PIN']}
+                    self.accounts[user['Account Number']] = {'First Name': user['First Name'], 'Last Name': user['Last Name'], 'PIN': user['PIN'], 'Balance':user['Balance']}
 
             #print(self.accounts)
         except FileNotFoundError:

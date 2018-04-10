@@ -100,7 +100,6 @@ class ATM:
         self.submitButton.place(x=445, y=100, width=55, height=20)
         self.quitBut.place(x=25, y=10, width=100, height=25)
         self.backBut.place(x=475, y=10, width=100, height=25)
-        #self.submitButton.bind("<Button-1>", self.deposit_trans)
         self.frame.pack()
 
     def Logs(self):
