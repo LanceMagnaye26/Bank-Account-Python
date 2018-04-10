@@ -109,10 +109,11 @@ class ATM:
     def details(self):
         pass
 
-master = Tk()
-master.title("Sign In")
-#master.geometry("600x420")
-icon = PhotoImage(file="icon.png")
-master.tk.call("wm",'iconphoto',master._w,icon)
-obj = ATM(master)
-master.mainloop()
+if __name__ == '__main__':
+    master = Tk()
+    master.title("Sign In")
+    #master.geometry("600x420")
+    icon = PhotoImage(file="icon.png")
+    master.tk.call("wm",'iconphoto',master._w,icon)
+    obj = ATM(master)
+    master.mainloop()

@@ -1,4 +1,4 @@
-from transaction_log import TransactionLog
+from models.transaction_log import TransactionLog
 
 class Account:
 
