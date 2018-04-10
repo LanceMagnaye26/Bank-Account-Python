@@ -36,12 +36,12 @@ class Model():
             user_dict = {'Account Number': Model._NEXT_ACC_NUM, 'First Name': f_name, 'Last Name': l_name, 'PIN': pin}
         self.accounts.append(user_dict)
         self.write_file()
-        print(len(self.accounts))
+        # print(len(self.accounts))
 
     def del_account(self, acc_num):
         self.read_file()
         for user in range(len(self.accounts)):
-            print(self.accounts[user])
+            # print(self.accounts[user])
             if self.accounts[user]['Account Number'] == acc_num:
                 self.accounts.pop(user)
 

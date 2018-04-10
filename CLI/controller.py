@@ -27,10 +27,12 @@ class Controller():
             return False
 
     def run(self):
+        print(sys.argv)
         if sys.argv[1] == '-c':
             if len(sys.argv) == 4:
                 self.view.creating_account()
                 pin = self.pin_value_error_check()
+                self.model.add_account(sys.argv[3], sys.argv[2], pin)
             else:
                 self.view.parameter_error()
 
