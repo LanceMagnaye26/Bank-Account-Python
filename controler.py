@@ -11,6 +11,7 @@ class Controller():
         self.master = master
         self.name_db = name_db
         self.name_gui = ATM(master)
+        self.name_db.read_file()
 
         self.name_gui.loginBut.config(command= self.Login)
 

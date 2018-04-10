@@ -25,16 +25,25 @@ class Controller():
         if actual_length != expected_length:
             self.view.pin_length_check()
             return False
+    def getFName(self):
+        return str(self.view.get_fname())
+
+    def getLName(self):
+        return str(self.view.get_fname())
+
+    def getChoice(self):
+        return str(self.view.get_choice())
 
     def run(self):
-        print(sys.argv)
-        if sys.argv[1] == '-c':
-            if len(sys.argv) == 4:
-                self.view.creating_account()
-                pin = self.pin_value_error_check()
-                self.model.add_account(sys.argv[3], sys.argv[2], pin)
-            else:
-                self.view.parameter_error()
+        option = self.getChoice()
+        if option == 'c':
+            self.view.creating_account()
+            fname = self.getFName()
+            lname =self.getLName()
+            pin = self.pin_value_error_check()
+            self.model.add_account(fname, lname, pin)
+        else:
+            self.view.parameter_error()
 
 
 if __name__ == '__main__':

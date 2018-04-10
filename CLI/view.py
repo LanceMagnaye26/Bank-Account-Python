@@ -16,6 +16,15 @@ class View():
     def get_pin(self):
         return input('Please enter a PIN: ')
 
+    def get_fname(self):
+        return input('Please enter a Name: ')
+
+    def get_lname(self):
+        return input('Please enter a Name: ')
+
+    def get_choice(self):
+        return input('Please enter a Option: ')
+
     def pin_length_check(self):
         print('Pin has to have length of 4')
 
