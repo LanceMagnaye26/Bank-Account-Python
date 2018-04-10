@@ -38,16 +38,26 @@ class Model():
         self.write_file()
         # print(len(self.accounts))
 
-    def del_account(self, acc_num):
+    def del_account(self, acc_num, pin):
         self.read_file()
-        for user in range(len(self.accounts)):
-            # print(self.accounts[user])
-            if self.accounts[user]['Account Number'] == acc_num:
-                self.accounts.pop(user)
+        check = False
+        for user in self.accounts:
+            if acc_num == user['Account Number']:
+                if str(pin) == user['PIN']:
+                    del self.accounts[self.accounts.index(user)]
+                    check = True
+        self.write_file()
+        return check
 
+    def no_user_check(self, acc_num):
+        self.read_file()
+        for user in self.accounts:
+            if user['Account Number'] == str(acc_num):
+                check = False
+        return check
 
 if __name__ == '__main__':
-    lance = Model()
-    lance.add_account('New', 'User', 1234)
+    m = Model()
+    m.del_account(8, 1234)
     # print(m.accounts)
     # print(m.accounts)

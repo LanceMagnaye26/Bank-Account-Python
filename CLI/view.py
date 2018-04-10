@@ -1,32 +1,29 @@
 
 class View():
-    def value_error(self):
+    def value_error_msg(self):
         print('Please enter a number for your choice')
         return
 
-    def creating_account(self):
-        print('Welcome to Account Creation')
+    def creating_account_msg(self):
+        print('Welcome to account creation')
 
-    def parameter_error(self):
+    def deleting_account_msg(self):
+        print('Welcome to account deletion')
+
+    def parameter_error_msg(self):
         print('Missing parameter')
 
-    def get_account(self):
-        pass
-
-    def get_pin(self):
+    def get_pin_msg(self):
         return input('Please enter a PIN: ')
 
-    def get_fname(self):
-        return input('Please enter a Name: ')
-
-    def get_lname(self):
-        return input('Please enter a Name: ')
-
-    def get_choice(self):
-        return input('Please enter a Option: ')
-
-    def pin_length_check(self):
+    def pin_length_check_msg(self):
         print('Pin has to have length of 4')
+
+    def inc_pin_msg(self):
+        print('Incorrect pin. Please try again')
+
+    def no_user_msg(self):
+        print('User does not exist')
 
 
 

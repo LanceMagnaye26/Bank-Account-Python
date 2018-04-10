@@ -1,5 +1,5 @@
-from CLI.view import View
-from CLI.model import Model
+from view import View
+from model import Model
 import sys
 
 
@@ -11,39 +11,42 @@ class Controller():
     def pin_value_error_check(self):
         check = False
         while check != True:
+            pin = self.view.get_pin_msg()
+            if pin == 'cancel':
+                sys.exit(0)
             try:
-                pin = int(self.view.get_pin())
+                pin = int(pin)
                 if self.check_length(4, len(str(pin))) != False:
                     check = True
                     return pin
                 else:
-                    check = False
+                    self.view.pin_length_check_msg()
             except ValueError:
-                self.view.value_error()
+                self.view.value_error_msg()
 
     def check_length(self, expected_length, actual_length):
         if actual_length != expected_length:
-            self.view.pin_length_check()
             return False
-    def getFName(self):
-        return str(self.view.get_fname())
-
-    def getLName(self):
-        return str(self.view.get_fname())
-
-    def getChoice(self):
-        return str(self.view.get_choice())
 
     def run(self):
-        option = self.getChoice()
-        if option == 'c':
-            self.view.creating_account()
-            fname = self.getFName()
-            lname =self.getLName()
-            pin = self.pin_value_error_check()
-            self.model.add_account(fname, lname, pin)
-        else:
-            self.view.parameter_error()
+        if sys.argv[1] == '-n':
+            if len(sys.argv) == 4:
+                self.view.creating_account_msg()
+                pin = self.pin_value_error_check()
+                self.model.add_account(sys.argv[2], sys.argv[3], pin)
+            else:
+                self.view.parameter_error_msg()
+        elif sys.argv[1] == '-d':
+            if len(sys.argv) == 3:
+                if self.model.no_user_check(sys.argv[2]) == False:
+                    self.view.deleting_account_msg()
+                    pin = self.pin_value_error_check()
+                    if self.model.del_account(sys.argv[2], pin) != True:
+                         self.view.inc_pin_msg()
+                else:
+                    self.view.no_user_msg()
+            else:
+                self.view.parameter_error_msg()
 
 
 if __name__ == '__main__':
