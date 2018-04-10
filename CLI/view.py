@@ -14,7 +14,7 @@ class View():
         pass
 
     def get_pin(self):
-        return('Please enter a PIN: ')
+        return input('Please enter a PIN: ')
 
 
 

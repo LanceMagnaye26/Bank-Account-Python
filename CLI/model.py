@@ -2,7 +2,7 @@ import csv
 class Model():
 
     _NEXT_ACC_NUM = 1
-    
+
     def __init__(self):
         self.filename = 'accounts.csv'
         self.accounts = []

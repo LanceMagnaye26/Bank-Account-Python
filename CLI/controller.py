@@ -8,16 +8,23 @@ class Controller():
         self.view = View()
         self.model = Model()
 
+    def value_error_check(self, user_inp):
+        check = False
+        while check != True:
+            try:
+                inp = int(user_inp)
+                check = True
+            except ValueError:
+                self.view.value_error()
+                break
+        print(check)
+        return inp
+
     def run(self):
         if sys.argv[1] == '-c':
             if len(sys.argv) == 4:
                 self.view.creating_account()
-                try:
-                    pin = int(input(self.view.get_pin()))
-
-                except ValueError:
-                    self.view.value_error()
-
+                pin = self.value_error_check(self.view.get_pin())
             else:
                 self.view.parameter_error()
 
