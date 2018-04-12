@@ -1,5 +1,5 @@
 import json
-#pin in different file
+#pin in different file - done
 #chequing and savings account
 #transaction log
 #transaction teller
@@ -8,13 +8,14 @@ import json
 #confirm pin
 #managing accounts
 
-class Model():
+class Users():
 
     _NEXT_ACC_NUM = 1000000
 
     def __init__(self):
         self.filename = 'accounts.json'
         self.accounts = {}
+        self.read_file()
 
     def write_file(self):
         with open(self.filename, 'w') as open_f:

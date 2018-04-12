@@ -1,12 +1,15 @@
 from view import View
-from model import Model
+from model import Users
+from model2 import Managers
 import sys
 
 
 class Controller():
     def __init__(self):
         self.view = View()
-        self.model = Model()
+        self.model = Users()
+        self.managers = Managers()
+        self.Users = Users()
 
     def pin_value_error_check(self):
         check = False
@@ -29,20 +32,43 @@ class Controller():
             return False
 
     def run(self):
-        inp = self.view.get_user_cred_msg()
-        while inp != 'quit' and 'q':
-            if sys.argv[1] == '-n':
-                self.view.creating_account_msg()
-                pin = self.pin_value_error_check()
-                self.model.add_account(sys.argv[2], sys.argv[3], pin)
-            elif inp == '-d':
-                if self.model.no_user_check(sys.argv[2]) == False:
-                    self.view.deleting_account_msg()
-                    pin = self.pin_value_error_check()
-                    if self.model.del_account(sys.argv[2], pin) != True:
-                         self.view.inc_pin_msg()
-                else:
-                    self.view.no_user_msg()
+        #get manager id and password
+        inp = self.view.get_manager_id()
+        if inp in self.managers.managers:
+            passinp = self.view.get_manager_password()
+            if passinp == self.managers.managers[inp]['Password']:
+                # loop
+                option = ''
+                while option != 'quit' and option != 'q':
+                    # show options
+                    option = self.view.main_menu()
+                    # user choses an option and it gets exicuted
+                    if option == '-n' or option == '1':
+                        self.view.creating_account_msg()
+                        fname = self.view.get_user_fname()
+                        lname = self.view.get_user_lname()
+                        pin = self.pin_value_error_check()
+                        self.model.add_account(fname, lname, pin)
+                    elif option == '-d' or option == '2':
+                        print(self.Users.accounts)
+                        # inp =
+                        self.view.deleting_account_msg()
+                        acc_num = str(self.view.get_acc_num())
+                        pin = self.pin_value_error_check()
+                        if acc_num in self.Users.accounts:
+                            if pin == self.Users.accounts[acc_num]['PIN']:
+                                self.model.del_account(acc_num)
+                            else:
+                                self.view.inc_pin_msg()
+                        else:
+                            self.view.no_user_msg()
+                    elif option == '-m' or option == '3':
+                        print('not implimented yet')
+            else:
+                self.view.inc_pin_msg()
+        else:
+            self.view.no_user_msg()
+
 
 
 if __name__ == '__main__':

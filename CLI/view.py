@@ -28,15 +28,30 @@ class View():
     def get_user_cred_msg(self):
         return input('Enter user credentials: ')
 
-    def get_user_pass_msg(self):
+    def get_user_pass(self):
         return input('Enter password: ')
+
+    def get_user_fname(self):
+        return input('Enter your first name: ')
+
+    def get_user_lname(self):
+        return input('Enter your last name: ')
+
+    def get_manager_id(self):
+        return input('Enter your ID: ')
+
+    def get_manager_password(self):
+        return int(input('Enter your password: '))
+
+    def get_acc_num(self):
+        return int(input('Enter an Account number: '))
 
     def main_menu(self):
         print('Choose what you would like to do:\n'
-              '1. -c Create an account\n'
-              '2. -d Delete an account\n'
-              '3. -m Manage an account')
-
+              '\t1. -c Create an account\n'
+              '\t2. -d Delete an account\n'
+              '\t3. -m Manage an account')
+        return input()
 
 
 if __name__ == "__main__":
