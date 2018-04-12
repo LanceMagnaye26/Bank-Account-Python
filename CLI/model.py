@@ -46,7 +46,7 @@ class Model():
 
     def pin_check(self, acc_num, pin):
         self.read_file()
-        if str(pin) == self.accounts[acc_num]['PIN']:
+        if pin == self.accounts[acc_num]['PIN']:
             return True
 
     def no_user_check(self, acc_num):
