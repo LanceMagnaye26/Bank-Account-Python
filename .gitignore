@@ -1,0 +1,4 @@
+.idea
+__pycache__
+views/.idea
+views/__pycache__
