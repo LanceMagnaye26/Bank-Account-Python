@@ -25,10 +25,20 @@ class View():
     def no_user_msg(self):
         print('User does not exist')
 
+    def get_user_cred_msg(self):
+        return input('Enter user credentials: ')
+
+    def get_user_pass_msg(self):
+        return input('Enter password: ')
+
+    def main_menu(self):
+        print('Choose what you would like to do:\n'
+              '1. -c Create an account\n'
+              '2. -d Delete an account\n'
+              '3. -m Manage an account')
 
 
 
 if __name__ == "__main__":
     pornhub = View()
 
-    pornhub.main_menu()

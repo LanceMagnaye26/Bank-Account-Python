@@ -7,6 +7,7 @@
     <orderEntry type="module" module-name="views" />
     <orderEntry type="module" module-name="views" />
     <orderEntry type="module" module-name="models" />
+    <orderEntry type="module" module-name="BigProject" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />

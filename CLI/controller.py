@@ -29,15 +29,13 @@ class Controller():
             return False
 
     def run(self):
-        if sys.argv[1] == '-n':
-            if len(sys.argv) == 4:
+        inp = self.view.get_user_cred_msg()
+        while inp != 'quit' and 'q':
+            if sys.argv[1] == '-n':
                 self.view.creating_account_msg()
                 pin = self.pin_value_error_check()
                 self.model.add_account(sys.argv[2], sys.argv[3], pin)
-            else:
-                self.view.parameter_error_msg()
-        elif sys.argv[1] == '-d':
-            if len(sys.argv) == 3:
+            elif inp == '-d':
                 if self.model.no_user_check(sys.argv[2]) == False:
                     self.view.deleting_account_msg()
                     pin = self.pin_value_error_check()
@@ -45,8 +43,6 @@ class Controller():
                          self.view.inc_pin_msg()
                 else:
                     self.view.no_user_msg()
-            else:
-                self.view.parameter_error_msg()
 
 
 if __name__ == '__main__':

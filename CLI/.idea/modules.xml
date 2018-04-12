@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://E:/School/Python/Quotes/.idea/BigProject.iml" filepath="E:/School/Python/Quotes/.idea/BigProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/CLI.iml" filepath="$PROJECT_DIR$/.idea/CLI.iml" />
       <module fileurl="file://$PROJECT_DIR$/../models/.idea/models.iml" filepath="$PROJECT_DIR$/../models/.idea/models.iml" />
       <module fileurl="file://$PROJECT_DIR$/../views/.idea/views.iml" filepath="$PROJECT_DIR$/../views/.idea/views.iml" />
