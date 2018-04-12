@@ -1,4 +1,4 @@
-.idea
-__pycache__
-views/.idea
-views/__pycache__
+.idea/
+__pycache__/
+views/.idea/
+views/__pycache__/
