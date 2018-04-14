@@ -160,7 +160,7 @@ class ATM:
         #create
         self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white")
         self.savingsBut = Button(self.frame, text="Savings", bg=self.color1, fg="white")
-        self.chequingBut = Button(self.frame, text="chequing", bg=self.color1, fg="white")
+        self.chequingBut = Button(self.frame, text="Chequing", bg=self.color1, fg="white")
         # place
         self.quitBut.place(x=25, y=10, width=100, height=25)
         self.savingsBut.place(x=250, y=100, width=100, height=25)
