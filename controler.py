@@ -7,7 +7,7 @@ import os
 
 class Controller():
     def __init__(self, master, bank_db):
-
+        self.TABLE = "6,9,7,0,3,2,4,5,1,8"
         self.master = master
         self.bank_db = bank_db
         self.bank_gui = ATM(master)
@@ -27,8 +27,17 @@ class Controller():
 
     def Password(self):
         try:
+
             pin = int(self.bank_gui.passInp.get())
-            if pin == self.bank_db.accounts[self.accNum]['PIN']:
+            answer = ""
+            stringed = str(pin)
+            while len(stringed) > 0:
+                for pos in range(len(self.TABLE)):
+                    if self.TABLE[pos] == stringed[-1]:
+                        equiv = str(self.TABLE[pos + 2])
+                answer = answer + equiv
+                stringed = stringed[:-1]
+            if answer == self.bank_db.accounts[self.accNum]['PIN']:
                 self.gotoAcounts()
                 self.user = self.bank_db.accounts[self.accNum]
             else:
