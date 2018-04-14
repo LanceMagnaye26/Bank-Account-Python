@@ -44,8 +44,8 @@ class Model():
             if n < int(user):
                 n = int(user)
         acc_num = n + 1
-        self.accounts[acc_num] = {'PIN': self._encrypt(pin), 'First Name': f_name, 'Last Name': l_name, 'Type': {'Chequing': {'Balance': 0, 'Transaction Log': []}, 'Savings': {'Balance':0, 'Transaction Log': []}}}
-        self.write_file()git
+        self.accounts[acc_num] = {'PIN': self._encrypt(pin), 'First Name': f_name.title(), 'Last Name': l_name.title(), 'Type': {'Chequing': {'Balance': 0, 'Transaction Log': []}, 'Savings': {'Balance':0, 'Transaction Log': []}}}
+        self.write_file()
 
 
     def del_account(self, acc_num):
@@ -74,18 +74,37 @@ class Model():
         if str(password) == str(self.tellers[teller]['Password']):
             return True
 
-    def pin_value_check(self, pin):
+    # def pin_value_check(self, pin):
+    #     try:
+    #         pin = int(pin)
+    #         if self.check_length(4, len(str(pin)), 6) != True:
+    #             return 0
+    #         else:
+    #             return 2
+    #     except ValueError:
+    #         return 1
+
+    def pin_value_check(self, pin1, pin2):
         try:
-            pin = int(pin)
-            if self.check_length(4, len(str(pin))) != True:
+            pin1 = int(pin1)
+            pin2 = int(pin2)
+            if self.check_length(4, len(str(pin1)), 6) != True or self.check_length(4, len(str(pin2)), 6) != True:
                 return 0
             else:
-                return 2
+                if pin1 == pin2:
+                    return 3
+                else:
+                    return 2
         except ValueError:
             return 1
 
-    def check_length(self, expected_length, actual_length):
-        if actual_length == expected_length:
+    def check_length(self, expected_length, actual_length, expected_length2=None):
+        if actual_length == expected_length or actual_length == expected_length2:
+            return True
+
+    def pin_acc_num_check(self, acc_num, pin):
+        self.read_file()
+        if pin == self._decrypt(self.accounts[acc_num]['PIN']):
             return True
 
     def _encrypt(self, password):
