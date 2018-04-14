@@ -29,20 +29,16 @@ class Controller():
             return False
 
     def run(self):
-        inp = self.view.get_user_cred_msg()
-        while inp != 'quit' and 'q':
-            if sys.argv[1] == '-n':
-                self.view.creating_account_msg()
-                pin = self.pin_value_error_check()
-                self.model.add_account(sys.argv[2], sys.argv[3], pin)
-            elif inp == '-d':
-                if self.model.no_user_check(sys.argv[2]) == False:
-                    self.view.deleting_account_msg()
-                    pin = self.pin_value_error_check()
-                    if self.model.del_account(sys.argv[2], pin) != True:
-                         self.view.inc_pin_msg()
-                else:
-                    self.view.no_user_msg()
+        teller_cred = self.view.get_teller_cred_msg().title()
+        while teller_cred != 'q' or teller_cred != 'quit':
+            while self.model.no_teller_check(teller_cred) != True:
+                self.view.wrong_username_msg()
+                teller_cred = self.view.get_teller_cred_msg().title()
+            teller_pass = self.view.get_teller_pass_msg()
+            while self.model.teller_password_check(teller_cred, teller_pass) != True:
+                self.view.wrong_pass_msg()
+                teller_pass = self.view.get_teller_pass_msg()
+            self.view.main_menu()
 
 
 if __name__ == '__main__':

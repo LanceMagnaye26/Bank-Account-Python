@@ -4,15 +4,6 @@ class View():
         print('Please enter a number for your choice')
         return
 
-    def creating_account_msg(self):
-        print('Welcome to account creation')
-
-    def deleting_account_msg(self):
-        print('Welcome to account deletion')
-
-    def parameter_error_msg(self):
-        print('Missing parameter')
-
     def get_pin_msg(self):
         return input('Please enter a PIN: ')
 
@@ -20,16 +11,19 @@ class View():
         print('Pin has to have length of 4')
 
     def inc_pin_msg(self):
-        print('Incorrect pin. Please run again!')
+        print('Incorrect pin. Please try again!')
 
-    def no_user_msg(self):
-        print('User does not exist')
-
-    def get_user_cred_msg(self):
+    def get_teller_cred_msg(self):
         return input('Enter user credentials: ')
 
-    def get_user_pass_msg(self):
+    def get_teller_pass_msg(self):
         return input('Enter password: ')
+
+    def wrong_pass_msg(self):
+        print('Wrong password! Please try again!')
+
+    def wrong_username_msg(self):
+        print('Wrong username! Please try again!')
 
     def main_menu(self):
         print('Choose what you would like to do:\n'

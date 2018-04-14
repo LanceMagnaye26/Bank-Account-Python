@@ -15,6 +15,7 @@ class Model():
     def __init__(self):
         self.filename = 'accounts.json'
         self.accounts = {}
+        self.tellers = {}
 
     def write_file(self):
         with open(self.filename, 'w') as open_f:
@@ -28,6 +29,10 @@ class Model():
         except FileNotFoundError:
             self.write_file()
 
+    def read_tellers_file(self):
+        with open('tellers.json', 'r') as open_f:
+            self.tellers = json.load(open_f)
+
 
     def add_account(self, f_name, l_name, pin):
         self.read_file()
@@ -39,10 +44,12 @@ class Model():
         self.accounts[acc_num] = {'PIN': pin, 'First Name': f_name, 'Last Name': l_name, 'Type': {'Chequing': {'Balance': 0, 'Transaction Log': []}, 'Savings': {'Balance':0, 'Transaction Log': []}}}
         self.write_file()
 
+
     def del_account(self, acc_num):
         self.read_file()
         del self.accounts[str(acc_num)]
         self.write_file()
+
 
     def pin_check(self, acc_num, pin):
         self.read_file()
@@ -54,8 +61,15 @@ class Model():
         if str(acc_num) in self.accounts:
             return True
 
+    def no_teller_check(self, teller):
+        self.read_tellers_file()
+        if teller in self.tellers:
+            return True
+
+    def teller_password_check(self, teller, password):
+        self.read_tellers_file()
+        if str(password) == str(self.tellers[teller]['Password']):
+            return True
+
 if __name__ == '__main__':
     m = Model()
-    m.del_account(1)
-    # print(m.accounts)
-    # print(m.accounts)
