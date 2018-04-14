@@ -3,7 +3,11 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <orderEntry type="jdk" jdkName="Python 3.6.2 (C:\Users\Lance\AppData\Local\Programs\Python\Python36-32\python.exe)" jdkType="Python SDK" />
+=======
+    <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
+>>>>>>> Stashed changes
 =======
     <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
 >>>>>>> Stashed changes

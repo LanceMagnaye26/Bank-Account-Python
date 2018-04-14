@@ -38,6 +38,11 @@ class Controller:
             acc_num_check = self.model.no_user_check(acc_num)
         return acc_num
 
+    def pin_user_check(self, acc_num, pin):
+        while self.model.pin_acc_num_check(acc_num, pin) != True:
+            self.view.inc_pin_msg()
+            pin = self.pin_value_check()
+
     def run(self):
         teller_cred = self.view.get_teller_cred_msg().title()
         while teller_cred != 'q' or teller_cred != 'quit':
@@ -62,14 +67,26 @@ class Controller:
                     self.view.welcome_delete_acc_msg()
                     acc_num = self.user_check()
                     pin = self.pin_value_check()
-                    while self.model.pin_acc_num_check(acc_num, pin) != True:
-                        self.view.inc_pin_msg()
-                        pin = self.pin_value_check()
+                    self.pin_user_check(acc_num, pin)
                     self.model.del_account(acc_num)
                     self.view.del_success_msg()
                 elif inp == '-m':
                     self.view.welcome_manage_acc_msg()
-
+                    acc_num = self.user_check()
+                    pin = self.pin_value_check()
+                    self.pin_user_check(acc_num, pin)
+                    self.view.manage_acc_menu()
+                    inp2 = self.view.get_acc_mng()
+                    while inp2 != '-q':
+                        if inp2 == '-d':
+                            pass
+                        elif inp2 == '-w':
+                            pass
+                        elif inp2 == '-h':
+                            self.view.help_mng_acc_menu()
+                        inp2 = self.view.get_acc_mng()
+                elif inp == '-h':
+                    self.view.help_main_menu()
                 else:
                     self.view.invalid_choice_msg()
                     self.view.main_menu()

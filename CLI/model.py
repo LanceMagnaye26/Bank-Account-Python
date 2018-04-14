@@ -1,13 +1,6 @@
 import json
-#pin in different file
-#chequing and savings account
+from chequing import Chequing
 #transaction log
-#transaction teller
-#delete account give money
-#receipt
-#confirm pin
-#managing accounts
-
 
 class Model():
 
@@ -74,15 +67,6 @@ class Model():
         if str(password) == str(self.tellers[teller]['Password']):
             return True
 
-    # def pin_value_check(self, pin):
-    #     try:
-    #         pin = int(pin)
-    #         if self.check_length(4, len(str(pin)), 6) != True:
-    #             return 0
-    #         else:
-    #             return 2
-    #     except ValueError:
-    #         return 1
 
     def pin_value_check(self, pin1, pin2):
         try:

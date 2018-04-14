@@ -1,5 +1,5 @@
 
-class View():
+class View:
     def value_error_msg(self):
         print('\nPlease enter a number for your choice')
         return
@@ -14,7 +14,7 @@ class View():
         print('\nPin has to have length of 4 or 6')
 
     def no_user_msg(self):
-        print('User does not exist')
+        print('\nUser does not exist')
 
     def inc_pin_msg(self):
         print('\nIncorrect pin. Please try again!')
@@ -36,6 +36,9 @@ class View():
 
     def main_menu(self):
         print('\nCommands:\n1. -c Create an account\n2. -d Delete an account\n3. -m Manage an account\n4. -q Quit\n5. -h Help')
+
+    def manage_acc_menu(self):
+        print('\nCommands:\n1. -d Deposit\n2. -w Withdraw\n3. -q Quit\n4. -h Help')
 
     def choice_msg(self):
         return input('\nPlease choose what to do: ')
@@ -65,10 +68,20 @@ class View():
         print('\nWelcome to account management')
 
     def get_acc_num(self):
-        return input('Please enter an account number: ')
+        return input('\nPlease enter an account number: ')
 
+    def get_acc_mng(self):
+        return input('\nPlease choose what to do with this account: ')
 
+    def help_main_menu(self):
+        print('\nPress -c to create a new account for a new user. The account will have both Chequing and Savings.'
+              '\nPress -d to delete an existing account of a user in the database. This command will delete the whole account including Chequing and Savings.'
+              '\nPress -m to manage an existing account of a user in the database.'
+              '\nPress -q to quit the main menu and return to log in.'
+              '\nPress -h for help and instructions.')
 
-if __name__ == "__main__":
-    pornhub = View()
-
+    def help_mng_acc_menu(self):
+        print('\nPress -d to deposit money into this account.'
+              '\nPress -w to withdraw money from this account. Overdraft up to $500 for Savings account type.'
+              '\nPress -q to quit managing account section and return to main menu.'
+              '\nPress -h for help and instructions.')
