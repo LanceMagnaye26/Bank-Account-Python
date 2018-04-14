@@ -45,7 +45,7 @@ class Model():
                 n = int(user)
         acc_num = n + 1
         self.accounts[acc_num] = {'PIN': self._encrypt(pin), 'First Name': f_name, 'Last Name': l_name, 'Type': {'Chequing': {'Balance': 0, 'Transaction Log': []}, 'Savings': {'Balance':0, 'Transaction Log': []}}}
-        self.write_file()git
+        self.write_file()
 
 
     def del_account(self, acc_num):

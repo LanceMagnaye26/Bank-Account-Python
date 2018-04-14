@@ -2,3 +2,7 @@
 __pycache__/
 views/.idea/
 views/__pycache__/
+models/.idea/
+models/__pycache__/
+CLI/accounts.json
+.gitignore
