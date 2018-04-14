@@ -1,8 +1,7 @@
 import json
 from chequing import Chequing
+from savings import Savings
 import random
-
-#transaction log
 
 class Model():
 
@@ -38,7 +37,8 @@ class Model():
             if n < int(user):
                 n = int(user)
         acc_num = n + 1
-        self.accounts[acc_num] = {'PIN': self._encrypt(pin)[0], 'First Name': f_name.title(), 'Last Name': l_name.title(), 'Type': {'Chequing': {'Balance': 0, 'Transaction Log': []}, 'Savings': {'Balance':0, 'Transaction Log': []}}}
+        keys = self._encrypt(pin)
+        self.accounts[acc_num] = {'PIN': keys[0], 'First Name': f_name.title(), 'Last Name': l_name.title(), 'Type': {'Chequing': {'Balance': 0, 'Transaction Log': []}, 'Savings': {'Balance':0, 'Transaction Log': []}}, 'key': keys[1]}
         self.write_file()
 
 
@@ -92,11 +92,37 @@ class Model():
         if pin == self._decrypt(self.accounts[acc_num]['PIN']):
             return True
 
-    def deposit_chequing(self, name, amount):
+    def deposit_chequing(self, acc_num, amount, name):
         self.read_file()
         account = Chequing(name)
+        account.acc_bal = self.accounts[acc_num]['Type']['Chequing']['Balance']
         account.deposit(amount)
-        pass
+        self.accounts[acc_num]['Type']['Chequing']['Balance'] = account.acc_bal
+        return amount
+
+    def deposit_savings(self, acc_num, amount, name):
+        self.read_file()
+        account = Savings(name)
+        account.acc_bal = self.accounts[acc_num]['Type']['Savings']['Balance']
+        account.deposit(amount)
+        self.accounts[acc_num]['Type']['Savings']['Balance'] = account.acc_bal
+        return amount
+
+    def withdraw_chequing(self, acc_num, amount, name):
+        self.read_file()
+        account = Chequing(name)
+        account.acc_bal = self.accounts[acc_num]['Type']['Chequing']['Balance']
+        account.withdraw(amount)
+        self.accounts[acc_num]['Type']['Chequing']['Balance'] = account.acc_bal
+        return amount
+
+    def withdraw_savings(self, acc_num, amount, name):
+        self.read_file()
+        account = Chequing(name)
+        account.acc_bal = self.accounts[acc_num]['Type']['Chequing']['Balance']
+        account.withdraw(amount)
+        self.accounts[acc_num]['Type']['Chequing']['Balance'] = account.acc_bal
+        return amount
 
     def _encrypt(self, pin):
         rand = random.randint(17,42)
@@ -107,27 +133,6 @@ class Model():
         pin = int(pin_and_num[0])/int(pin_and_num[1])
         return int(pin)
 
-    # def _encrypt(self, password):
-    #     answer = ""
-    #     stringed = str(password)
-    #     while len(stringed) > 0:
-    #         for pos in range(len(self._TABLE)):
-    #             if self._TABLE[pos] == stringed[-1]:
-    #                 equiv = str(self._TABLE[pos+2])
-    #         answer = answer + equiv
-    #         stringed = stringed[:-1]
-    #     return answer
-    #
-    # def _decrypt(self, encrypted):
-    #     answer = ""
-    #     stringed = str(encrypted)
-    #     while len(stringed) > 0:
-    #         for pos in range(len(self._TABLE)):
-    #             if self._TABLE[pos] == stringed[-1]:
-    #                 equiv = str(self._TABLE[pos-2])
-    #         answer = answer + equiv
-    #         stringed = stringed[:-1]
-    #     return answer
 
 if __name__ == '__main__':
     m = Model()

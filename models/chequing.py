@@ -43,7 +43,6 @@ class Chequing(Account):
 
 if __name__ == "__main__":
     acc = Chequing('Nam')
-    acc.withdraw(200)
-    print(acc.balance)
-    acc.post_cheque(200)
-    print(acc.balance)
+    print(acc.acc_bal)
+    acc.acc_bal = 100
+    print(acc.acc_bal)
