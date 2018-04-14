@@ -1,6 +1,10 @@
 import json
+<<<<<<< HEAD
 from chequing import Chequing
 from savings import Savings
+=======
+#from models.chequing import Chequing
+>>>>>>> 3efbc9d60ad2dd1a497cf49ae05b0013f61289eb
 import random
 
 class Model():
@@ -137,6 +141,6 @@ class Model():
 if __name__ == '__main__':
     m = Model()
     the_tuple = m._encrypt(1234)
-    print("The hashed password is", the_tuple[0])
+    print("The hashed password is", the_tuple)
     print("The password is", m._decrypt(the_tuple))
 
