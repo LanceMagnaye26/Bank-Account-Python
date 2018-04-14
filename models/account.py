@@ -11,12 +11,10 @@ class Account:
         try:
             if acc_bal < 0:
                 print('Error: Account Balance needs to be a positive float or integer')
-                exit(1)
             else:
                 self.acc_bal = float(acc_bal)
         except TypeError:
             print('Error: Account Balance needs to be a float or an integer')
-            exit(1)
         self.acc_num = Account.__NEXT_ACC_NUM
         self.transaction_log = []
         Account.__NEXT_ACC_NUM += 1
@@ -30,11 +28,11 @@ class Account:
                     self.acc_bal -= float(amount)
                     one_log = TransactionLog('Withdraw', amount)
                     self.transaction_log.append((one_log.action, one_log.date))
+                    return True
                 else:
                     print('Insufficient funds')
         except TypeError:
             print('Error: Amount has to be a float or an integer')
-        return
 
     def deposit(self, amount):
         try:
@@ -44,9 +42,10 @@ class Account:
                 self.acc_bal += float(amount)
                 one_log = TransactionLog('Deposit', amount)
                 self.transaction_log.append((one_log.action, one_log.date))
+                return True
         except TypeError:
             print('Error: Amount has to be a float or an integer')
-        return
+
 
     @property
     def balance(self):

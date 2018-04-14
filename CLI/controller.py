@@ -43,6 +43,13 @@ class Controller:
             self.view.inc_pin_msg()
             pin = self.pin_value_check()
 
+    def get_amount(self):
+        try:
+            amount = float(self.view.get_amount_msg())
+            return amount
+        except ValueError:
+            self.view.value_error_msg()
+
     def run(self):
         teller_cred = self.view.get_teller_cred_msg().title()
         while teller_cred != 'q' or teller_cred != 'quit':
@@ -61,8 +68,7 @@ class Controller:
                     fname = self.view.get_fname_msg()
                     lname = self.view.get_lname_msg()
                     pin = self.pin_value_check()
-                    self.model.add_account(fname, lname, pin)
-                    self.view.add_success_msg()
+                    self.view.add_success_msg(self.model.add_account(fname, lname, pin))
                 elif inp == '-d':
                     self.view.welcome_delete_acc_msg()
                     acc_num = self.user_check()
@@ -79,22 +85,51 @@ class Controller:
                     inp2 = self.view.get_acc_mng()
                     while inp2 != '-q':
                         if inp2 == '-d':
-                            pass
+                            self.view.cheq_save_menu()
+                            inp3 = self.view.cheq_or_save_msg().title()
+                            if inp3 == '1' or inp3 == 'Chequing':
+                                amount = self.get_amount()
+                                if self.model.deposit_chequing(acc_num, amount, '') == True:
+                                    self.view.depos_success_msg(amount, 'Chequing')
+                            elif inp3 == '2' or inp3 == 'Savings':
+                                amount = self.get_amount()
+                                if self.model.deposit_savings(acc_num, amount, '') == True:
+                                    self.view.depos_success_msg(amount, 'Savings')
                         elif inp2 == '-w':
-                            pass
-                        elif inp2 == '-s':
-                            pass
+                            self.view.cheq_save_menu()
+                            inp3 = self.view.cheq_or_save_msg().title()
+                            if inp3 == '1' or inp3 == 'Chequing':
+                                amount = self.get_amount()
+                                if self.model.withdraw_chequing(acc_num, amount, '') == True:
+                                    self.view.withdr_success_msg(amount, 'Chequing')
+                            elif inp3 == '2' or inp3 == 'Savings':
+                                amount = self.get_amount()
+                                if self.model.withdraw_savings(acc_num, amount, ''):
+                                    self.view.withdr_success_msg(amount, 'Savings')
+                        elif inp2 == '-sb':
+                            self.view.cheq_save_menu()
+                            inp3 = self.view.cheq_or_save_msg().title()
+                            if inp3 == '1' or inp3 == 'Chequing':
+                                self.view.show_balance(self.model.get_balance(acc_num, 'Chequing'))
+                            elif inp3 == '2' or inp3 == 'Savings':
+                                self.view.show_balance(self.model.get_balance(acc_num, 'Savings'))
+                        elif inp2 == '-st':
+                            self.view.cheq_save_menu()
+                            inp3 = self.view.cheq_or_save_msg()
+                            if inp3 == '1' or inp3 == 'Chequing':
+                                self.view.show_transaction(self.model.get_transaction(acc_num, 'Chequing'))
+                            elif inp3 == '2' or inp3 == 'Savings':
+                                self.view.show_transaction(self.model.get_transaction(acc_num, 'Savings'))
                         elif inp2 == '-h':
                             self.view.help_mng_acc_menu()
                         else:
                             self.view.invalid_choice_msg()
+                        self.view.manage_acc_menu()
                         inp2 = self.view.get_acc_mng()
                 elif inp == '-h':
                     self.view.help_main_menu()
                 else:
                     self.view.invalid_choice_msg()
-                    self.view.main_menu()
-                    inp = self.view.choice_msg()
                 self.view.main_menu()
                 inp = self.view.choice_msg()
 

@@ -7,14 +7,10 @@ class Savings(Account):
 
     def __init__(self, name, acc_bal=0):
         try:
-            if acc_bal < 1000:
-                print('Error: Savings account need to be at least $1000.00')
-                exit(1)
-            else:
-                super().__init__(name, acc_bal)
+            super().__init__(name, acc_bal)
         except TypeError:
             print('Error: Account Balance needs to be a float or an integer')
-            exit(1)
+
 
     def pay_charge(self):
         if self.acc_bal < 1000:
@@ -34,5 +30,6 @@ class Savings(Account):
 if __name__ == "__main__":
     acc = Savings('Nam', 1000)
     acc2 = Savings('Nam', 2000)
-    acc.withdraw(2000)
+    acc.withdraw(50)
     print(acc)
+    print(acc.transaction_log)

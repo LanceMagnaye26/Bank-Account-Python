@@ -2,13 +2,18 @@
 class View:
     def value_error_msg(self):
         print('\nPlease enter a number for your choice')
-        return
 
     def get_pin_msg(self):
         return input('\nPlease enter a PIN: ')
 
     def pin_confirm_msg(self):
         return input('\nPlease confirm your PIN: ')
+
+    def cheq_or_save_msg(self):
+        return input('\nPlease choose an account: ')
+
+    def get_amount_msg(self):
+        return input('\nEnter amount: ')
 
     def pin_length_check_msg(self):
         print('\nPin has to have length of 4 or 6')
@@ -35,16 +40,27 @@ class View:
         print('\nWrong username! Please try again!')
 
     def main_menu(self):
-        print('\nCommands:\n1. -c Create an account\n2. -d Delete an account\n3. -m Manage an account\n4. -q Quit\n5. -h Help')
+        print('\nCommands:'
+              '\n1. -c Create an account'
+              '\n2. -d Delete an account'
+              '\n3. -m Manage an account'
+              '\n4. -q Quit'
+              '\n5. -h Help')
 
     def manage_acc_menu(self):
-        print('\nCommands:\n1. -d Deposit\n2. -w Withdraw\n3. -s Show transaction log\n4. -q Quit\n5. -h Help')
+        print('\nCommands:'
+              '\n1. -d Deposit'
+              '\n2. -w Withdraw'
+              '\n3. -sb Show balance'
+              '\n4. -st Show transaction log'
+              '\n5. -q Quit'
+              '\n6. -h Help')
 
     def choice_msg(self):
         return input('\nPlease choose what to do: ')
 
     def invalid_choice_msg(self):
-        print('\nInvalid option. Please choose option number 5 for help')
+        print('\nInvalid option. Please choose option -h for help')
 
     def get_fname_msg(self):
         return input('\nPlease enter your first name: ')
@@ -52,11 +68,18 @@ class View:
     def get_lname_msg(self):
         return input('\nPlease enter your last name: ')
 
-    def add_success_msg(self):
-        print('\nYour account has been successfully created!')
+    def add_success_msg(self, acc_num):
+        print('\nYour account has been successfully created!'
+              '\nYour account number is: {}'.format(acc_num))
 
     def del_success_msg(self):
         print('\nYour account has been successfully deleted')
+
+    def depos_success_msg(self, amount, type):
+        print('Successfully deposited ${} into {} account'.format(amount, type))
+
+    def withdr_success_msg(self, amount, type):
+        print('Successfully withdrew ${} from {} account'.format(amount, type))
 
     def welcome_create_acc_msg(self):
         print('\nWelcome to account creation!')
@@ -66,6 +89,12 @@ class View:
 
     def welcome_manage_acc_msg(self):
         print('\nWelcome to account management')
+
+    def show_balance(self, amount):
+        print('The current balance of the account is {}'.format(amount))
+
+    def show_transaction(self, log):
+        print('Transaction Log\n{}'.format(log))
 
     def get_acc_num(self):
         return input('\nPlease enter an account number: ')
@@ -82,7 +111,11 @@ class View:
 
     def help_mng_acc_menu(self):
         print('\nPress -d to deposit money into this account.'
-              '\nPress -w to withdraw money from this account. Overdraft up to $500 for Savings account type.'
-              '\nPress -s to show transaction log of the account'
+              '\nPress -w to withdraw money from this account. Overdraft up to $500 for Chequing account type.'
+              '\nPress -sb to show the balance of the account.'
+              '\nPress -st to show transaction log of the account.'
               '\nPress -q to quit managing account section and return to main menu.'
               '\nPress -h for help and instructions.')
+
+    def cheq_save_menu(self):
+        print('\n1. Chequing\n2. Savings')

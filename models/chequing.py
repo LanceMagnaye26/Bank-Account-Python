@@ -19,6 +19,7 @@ class Chequing(Account):
                     one_log = TransactionLog('Withdraw', amount)
                     self.transaction_log.append((one_log.action, one_log.date))
                     checker = True
+                    return checker
                 else:
                     print('Insufficient funds')
                     checker = False

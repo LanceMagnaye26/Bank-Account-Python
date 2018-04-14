@@ -1,10 +1,7 @@
 import json
-<<<<<<< HEAD
 from chequing import Chequing
 from savings import Savings
-=======
-#from models.chequing import Chequing
->>>>>>> 3efbc9d60ad2dd1a497cf49ae05b0013f61289eb
+
 import random
 
 class Model():
@@ -36,15 +33,19 @@ class Model():
 
     def add_account(self, f_name, l_name, pin):
         self.read_file()
-        n = 0
-        for user in self.accounts:
-            if n < int(user):
-                n = int(user)
-        acc_num = n + 1
+        if len(self.accounts) == 0:
+            n = 1
+            acc_num = n
+        else:
+            n = 0
+            for user in self.accounts:
+                if n < int(user):
+                    n = int(user)
+            acc_num = n + 1
         keys = self._encrypt(pin)
         self.accounts[acc_num] = {'PIN': keys[0], 'First Name': f_name.title(), 'Last Name': l_name.title(), 'Type': {'Chequing': {'Balance': 0, 'Transaction Log': []}, 'Savings': {'Balance':0, 'Transaction Log': []}}, 'key': keys[1]}
         self.write_file()
-
+        return acc_num
 
     def del_account(self, acc_num):
         self.read_file()
@@ -54,7 +55,7 @@ class Model():
 
     def pin_check(self, acc_num, pin):
         self.read_file()
-        if pin == self.accounts[acc_num]['PIN']:
+        if int(pin) == int(self.accounts[acc_num]['PIN'])/int(self.accounts[acc_num]['key']):
             return True
 
     def no_user_check(self, acc_num):
@@ -93,54 +94,76 @@ class Model():
 
     def pin_acc_num_check(self, acc_num, pin):
         self.read_file()
-        if pin == self._decrypt(self.accounts[acc_num]['PIN']):
+        if int(pin) == int(self.accounts[acc_num]['PIN'])/int(self.accounts[acc_num]['key']):
             return True
 
     def deposit_chequing(self, acc_num, amount, name):
         self.read_file()
         account = Chequing(name)
         account.acc_bal = self.accounts[acc_num]['Type']['Chequing']['Balance']
-        account.deposit(amount)
-        self.accounts[acc_num]['Type']['Chequing']['Balance'] = account.acc_bal
-        return amount
+        if account.deposit(amount) == True:
+            self.accounts[acc_num]['Type']['Chequing']['Balance'] = account.acc_bal
+            one_log = '{} ${} on {}'.format(account.transaction_log[0][0][0], account.transaction_log[0][0][1], account.transaction_log[0][1])
+            self.accounts[acc_num]['Type']['Chequing']['Transaction Log'].append(one_log)
+            self.write_file()
+            return True
+
 
     def deposit_savings(self, acc_num, amount, name):
         self.read_file()
         account = Savings(name)
         account.acc_bal = self.accounts[acc_num]['Type']['Savings']['Balance']
-        account.deposit(amount)
-        self.accounts[acc_num]['Type']['Savings']['Balance'] = account.acc_bal
-        return amount
+        if account.deposit(amount) == True:
+            self.accounts[acc_num]['Type']['Savings']['Balance'] = account.acc_bal
+            one_log = '{} ${} on {}'.format(account.transaction_log[0][0][0], account.transaction_log[0][0][1], account.transaction_log[0][1])
+            self.accounts[acc_num]['Type']['Savings']['Transaction Log'].append(one_log)
+            self.write_file()
+            return True
+
 
     def withdraw_chequing(self, acc_num, amount, name):
         self.read_file()
         account = Chequing(name)
         account.acc_bal = self.accounts[acc_num]['Type']['Chequing']['Balance']
-        account.withdraw(amount)
-        self.accounts[acc_num]['Type']['Chequing']['Balance'] = account.acc_bal
-        return amount
+        if account.withdraw(amount) == True:
+            self.accounts[acc_num]['Type']['Chequing']['Balance'] = account.acc_bal
+            one_log = '{} ${} on {}'.format(account.transaction_log[0][0][0], account.transaction_log[0][0][1], account.transaction_log[0][1])
+            self.accounts[acc_num]['Type']['Chequing']['Transaction Log'].append(one_log)
+            self.write_file()
+            return True
+
 
     def withdraw_savings(self, acc_num, amount, name):
         self.read_file()
         account = Chequing(name)
         account.acc_bal = self.accounts[acc_num]['Type']['Chequing']['Balance']
-        account.withdraw(amount)
-        self.accounts[acc_num]['Type']['Chequing']['Balance'] = account.acc_bal
-        return amount
+        if account.withdraw(amount) == True:
+            self.accounts[acc_num]['Type']['Savings']['Balance'] = account.acc_bal
+            one_log = '{} ${} on {}'.format(account.transaction_log[0][0][0], account.transaction_log[0][0][1], account.transaction_log[0][1])
+            self.accounts[acc_num]['Type']['Savings']['Transaction Log'].append(one_log)
+            self.write_file()
+            return True
+
+    def get_balance(self, acc_num, type):
+        self.read_file()
+        return self.accounts[acc_num]['Type'][type]['Balance']
+
+    def get_transaction(self, acc_num, type):
+        self.read_file()
+        return self.accounts[acc_num]['Type'][type]['Transaction Log']
 
     def _encrypt(self, pin):
         rand = random.randint(17,42)
         hashed_pin = int(pin)*rand
         return (hashed_pin, rand)
 
-    def _decrypt(self, pin_and_num):
-        pin = int(pin_and_num[0])/int(pin_and_num[1])
-        return int(pin)
+    # def _decrypt(self, hashed_pin, key):
+    #     pin = int(hashed_pin)/int(key)
+    #     return int(pin)
 
 
 if __name__ == '__main__':
     m = Model()
     the_tuple = m._encrypt(1234)
     print("The hashed password is", the_tuple)
-    print("The password is", m._decrypt(the_tuple))
 
