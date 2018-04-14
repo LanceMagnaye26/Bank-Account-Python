@@ -29,15 +29,10 @@ class Controller():
         try:
 
             pin = int(self.bank_gui.passInp.get())
-            answer = ""
-            stringed = str(pin)
-            while len(stringed) > 0:
-                for pos in range(len(self.TABLE)):
-                    if self.TABLE[pos] == stringed[-1]:
-                        equiv = str(self.TABLE[pos + 2])
-                answer = answer + equiv
-                stringed = stringed[:-1]
-            if answer == self.bank_db.accounts[self.accNum]['PIN']:
+            passwd = self.bank_db.accounts[self.accNum]["PIN"]
+            thing = int()
+            print(thing)
+            if pin == thing:
                 self.gotoAcounts()
                 self.user = self.bank_db.accounts[self.accNum]
             else:

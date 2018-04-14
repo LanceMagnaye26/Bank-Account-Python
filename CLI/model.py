@@ -1,5 +1,5 @@
 import json
-from chequing import Chequing
+#from models.chequing import Chequing
 import random
 
 #transaction log
@@ -132,6 +132,6 @@ class Model():
 if __name__ == '__main__':
     m = Model()
     the_tuple = m._encrypt(1234)
-    print("The hashed password is", the_tuple[0])
+    print("The hashed password is", the_tuple)
     print("The password is", m._decrypt(the_tuple))
 
