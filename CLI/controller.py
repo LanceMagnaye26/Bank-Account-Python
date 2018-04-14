@@ -8,22 +8,6 @@ class Controller():
         self.view = View()
         self.model = Model()
 
-    def pin_value_error_check(self):
-        check = False
-        while check != True:
-            pin = self.view.get_pin_msg()
-            if pin == 'cancel':
-                sys.exit(0)
-            try:
-                pin = int(pin)
-                if self.check_length(4, len(str(pin))) != False:
-                    check = True
-                    return pin
-                else:
-                    self.view.pin_length_check_msg()
-            except ValueError:
-                self.view.value_error_msg()
-
 
     def run(self):
         teller_cred = self.view.get_teller_cred_msg().title()
@@ -39,15 +23,20 @@ class Controller():
             inp = self.view.choice_msg()
             while inp != '-q':
                 if inp == '-c':
+                    self.view.welcome_create_acc_msg()
                     fname = self.view.get_fname_msg()
                     lname = self.view.get_lname_msg()
                     pin = self.view.get_pin_msg()
-                    while self.model.pin_value_check(pin) == False:
-                        self.view.value_error_msg()
-                        pin = self.view.get_pin_msg()
-                        while self.model.check_length(pin) != True:
+                    pin_check = self.model.pin_value_check(pin)
+                    while pin_check != 2:
+                        if pin_check == 1:
+                            self.view.value_error_msg()
+                            pin = self.view.get_pin_msg()
+                            pin_check = self.model.pin_value_check(pin)
+                        elif pin_check == 0:
                             self.view.pin_length_check_msg()
                             pin = self.view.get_pin_msg()
+                            pin_check = self.model.pin_value_check(pin)
                     self.model.add_account(fname, lname, pin)
                     self.view.add_success_msg()
                 self.view.main_menu()

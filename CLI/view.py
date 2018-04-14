@@ -43,6 +43,9 @@ class View():
     def add_success_msg(self):
         print('Your account has been successfully created!')
 
+    def welcome_create_acc_msg(self):
+        print('\nWelcome to account creation!')
+
 
 
 if __name__ == "__main__":

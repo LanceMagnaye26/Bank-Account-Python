@@ -74,8 +74,12 @@ class Model():
     def pin_value_check(self, pin):
         try:
             pin = int(pin)
+            if self.check_length(4, len(str(pin))) != True:
+                return 0
+            else:
+                return 2
         except ValueError:
-            return False
+            return 1
 
     def check_length(self, expected_length, actual_length):
         if actual_length == expected_length:
