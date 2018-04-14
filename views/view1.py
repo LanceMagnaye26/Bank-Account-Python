@@ -23,7 +23,7 @@ class ATM:
         self.uentry = Entry(self.frame)
 
         #events
-        self.loginBut = Button(self.frame,text="LOGIN",bg=self.color1,fg="white",command=self.verify1)
+        self.loginBut = Button(self.frame,text="LOGIN",bg=self.color1,fg="white",command=self.Password)
 
         #place on frame
         self.userlabel.place(x=125,y=150,width=120,height=20)
@@ -39,7 +39,7 @@ class ATM:
         self.passInp = Entry(self.frame, show="*")
 
         # events
-        self.loginBut = Button(self.frame, text="LOGIN", bg=self.color1, fg="white", command=self.verify2)
+        self.loginBut = Button(self.frame, text="LOGIN", bg=self.color1, fg="white", command=self.SelectAcount)
         self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white", command=self.Login)
 
         # place on frame
@@ -73,14 +73,14 @@ class ATM:
         self.frame = Frame(self.master, bg=self.color2, width=600, height=250)
         #master.geometry("800x400")
         # make
-        self.WBut20 = Button(self.frame, text="$20", bg=self.color1, fg="white")
-        self.WBut40 = Button(self.frame, text="$40", bg=self.color1, fg="white")
-        self.WBut60 = Button(self.frame, text="$60", bg=self.color1, fg="white")
-        self.WBut80 = Button(self.frame, text="$80", bg=self.color1, fg="white")
-        self.WBut100 = Button(self.frame, text="$100", bg=self.color1, fg="white")
-        self.WBut150 = Button(self.frame, text="$150", bg=self.color1, fg="white")
-        self.WBut200 = Button(self.frame, text="$200", bg=self.color1, fg="white")
-        self.WButChoice = Button(self.frame, text="Other", bg=self.color1, fg="white")
+        self.WBut20 = Button(self.frame, text="$20", bg=self.color1, fg="white", command=self.GoToConfirm)
+        self.WBut40 = Button(self.frame, text="$40", bg=self.color1, fg="white", command=self.GoToConfirm)
+        self.WBut60 = Button(self.frame, text="$60", bg=self.color1, fg="white", command=self.GoToConfirm)
+        self.WBut80 = Button(self.frame, text="$80", bg=self.color1, fg="white", command=self.GoToConfirm)
+        self.WBut100 = Button(self.frame, text="$100", bg=self.color1, fg="white", command=self.GoToConfirm)
+        self.WBut150 = Button(self.frame, text="$150", bg=self.color1, fg="white", command=self.GoToConfirm)
+        self.WBut200 = Button(self.frame, text="$200", bg=self.color1, fg="white", command=self.GoToConfirm)
+        self.WButChoice = Button(self.frame, text="Other", bg=self.color1, fg="white", command=self.WithdrawOther)
 
         self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white", command=self.Login)
         self.backBut = Button(self.frame, text="Back", bg=self.color1, fg="white", command=self.MainMenu)
@@ -102,53 +102,98 @@ class ATM:
         self.Clear()
         self.frame = Frame(self.master, bg=self.color2, width=600, height=250)
         self.money_box = Entry(self.frame, bg="honeydew", highlightcolor=self.color1)
-        self.submitButton = Button(self.frame, text="Submit", bg=self.color1, fg="white")
+        self.submitButton = Button(self.frame, text="Submit", bg=self.color1, fg="white", command=self.GoToConfirm)
         self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white", command=self.Login)
         self.backBut = Button(self.frame, text="Back", bg=self.color1, fg="white", command=self.MainMenu)
         #place
         self.money_box.place(x=200, y=100, width=200, height=20)
         self.submitButton.place(x=445, y=100, width=55, height=20)
         self.quitBut.place(x=25, y=10, width=100, height=25)
-        self.backBut.place(x=475, y=10, width=100, height=25)\
+        self.backBut.place(x=475, y=10, width=100, height=25)
 
         self.frame.pack()
 
-    def Logs(self):
+    def Logs(self, logs='string'):
+        #last 20
         self.Clear()
-        self.frame = Frame(self.master, bg=self.color2, width=600, height=250)
+        self.frame = Frame(self.master, bg=self.color2, width=600, height=400)
+        #create
+        self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white", command=self.Login)
+        self.backBut = Button(self.frame, text="Back", bg=self.color1, fg="white", command=self.MainMenu)
+        self.logs = Label(self.frame, text=logs, bg=self.color2, fg="Black")
+        #place
+        self.quitBut.place(x=25, y=10, width=100, height=25)
+        self.backBut.place(x=475, y=10, width=100, height=25)
+        self.logs.place(x=100, y=75, width=400, height=300)
+
+        self.frame.pack()
+
+    def Details(self, description='string'):
+        self.Clear()
+        self.frame = Frame(self.master, bg=self.color2, width=600, height=400)
 
         self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white", command=self.Login)
         self.backBut = Button(self.frame, text="Back", bg=self.color1, fg="white", command=self.MainMenu)
+        self.details = Label(self.frame, text=description, bg=self.color2, fg="Black")
 
+        self.quitBut.place(x=25, y=10, width=100, height=25)
+        self.backBut.place(x=475, y=10, width=100, height=25)
+        self.details.place(x=100, y=75, width=400, height=300)
+
+        self.frame.pack()
+
+    def WithdrawOther(self):
+        self.Clear()
+        self.frame = Frame(self.master, bg=self.color2, width=600, height=250)
+        #create
+        self.money_box = Entry(self.frame, bg="honeydew", highlightcolor=self.color1)
+        self.submitButton = Button(self.frame, text="Submit", bg=self.color1, fg="white", command=self.GoToConfirm)
+        self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white", command=self.Login)
+        self.backBut = Button(self.frame, text="Back", bg=self.color1, fg="white", command=self.MainMenu)
+        # place
+        self.money_box.place(x=200, y=100, width=200, height=20)
+        self.submitButton.place(x=445, y=100, width=55, height=20)
         self.quitBut.place(x=25, y=10, width=100, height=25)
         self.backBut.place(x=475, y=10, width=100, height=25)
 
         self.frame.pack()
 
-    def Details(self):
+    def SelectAcount(self):
         self.Clear()
-        self.frame = Frame(self.master, bg=self.color2, width=600, height=250)
-
+        self.frame = Frame(self.master, bg=self.color2, width=600, height=300)
+        #create
         self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white", command=self.Login)
-        self.backBut = Button(self.frame, text="Back", bg=self.color1, fg="white", command=self.MainMenu)
-
+        self.savingsBut = Button(self.frame, text="Savings", bg=self.color1, fg="white", command=self.MainMenu)
+        self.chequingBut = Button(self.frame, text="chequing", bg=self.color1, fg="white", command=self.MainMenu)
+        # place
         self.quitBut.place(x=25, y=10, width=100, height=25)
-        self.backBut.place(x=475, y=10, width=100, height=25)
+        self.savingsBut.place(x=250, y=100, width=100, height=25)
+        self.chequingBut.place(x=250, y=200, width=100, height=25)
 
         self.frame.pack()
 
-    def verify1(self):
-        message = "user SucessFull"
-        messagebox._show("Login Info", message)
-        self.Password()
+    def Confirm(self, message):
+        self.Clear()
+        self.frame = Frame(self.master, bg=self.color2, width=600, height=250)
+        # create
+        self.text_widget = Label(self.frame, font=75, text=message, bg=self.color2, highlightcolor=self.color1)
+        self.continueBut = Button(self.frame, text="Continue Banking", bg=self.color1, fg="white", command=self.MainMenu)
+        self.quitBut = Button(self.frame, text="Quit", bg=self.color1, fg="white", command=self.Login)
+        # place
+        self.text_widget.place(x=200, y=100, width=200, height=40)
+        self.continueBut.place(x=445, y=200, width=125, height=20)
+        self.quitBut.place(x=25, y=200, width=75, height=20)
 
-    def verify2(self):
-        message = "Login SucessFull"
-        messagebox._show("Login Info", message)
-        self.MainMenu()
+        self.frame.pack()
 
     def Clear(self):
         self.frame.destroy()
+
+    def GoToConfirm(self):
+        message = 'string'
+        self.Confirm(message)
+
+
 if __name__ == '__main__':
     master = Tk()
     master.title("Sign In")
