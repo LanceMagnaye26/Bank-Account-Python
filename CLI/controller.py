@@ -24,9 +24,6 @@ class Controller():
             except ValueError:
                 self.view.value_error_msg()
 
-    def check_length(self, expected_length, actual_length):
-        if actual_length != expected_length:
-            return False
 
     def run(self):
         teller_cred = self.view.get_teller_cred_msg().title()
@@ -39,6 +36,23 @@ class Controller():
                 self.view.wrong_pass_msg()
                 teller_pass = self.view.get_teller_pass_msg()
             self.view.main_menu()
+            inp = self.view.choice_msg()
+            while inp != '-q':
+                if inp == '-c':
+                    fname = self.view.get_fname_msg()
+                    lname = self.view.get_lname_msg()
+                    pin = self.view.get_pin_msg()
+                    while self.model.pin_value_check(pin) == False:
+                        self.view.value_error_msg()
+                        pin = self.view.get_pin_msg()
+                        while self.model.check_length(pin) != True:
+                            self.view.pin_length_check_msg()
+                            pin = self.view.get_pin_msg()
+                    self.model.add_account(fname, lname, pin)
+                    self.view.add_success_msg()
+                self.view.main_menu()
+                inp = self.view.choice_msg()
+
 
 
 if __name__ == '__main__':

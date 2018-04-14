@@ -7,6 +7,9 @@ class View():
     def get_pin_msg(self):
         return input('Please enter a PIN: ')
 
+    def pin_confirm_msg(self):
+        return input('Please confirm your PIN: ')
+
     def pin_length_check_msg(self):
         print('Pin has to have length of 4')
 
@@ -26,10 +29,19 @@ class View():
         print('Wrong username! Please try again!')
 
     def main_menu(self):
-        print('Choose what you would like to do:\n'
-              '1. -c Create an account\n'
-              '2. -d Delete an account\n'
-              '3. -m Manage an account')
+        print('\nCommands:\n1. -c Create an account\n2. -d Delete an account\n3. -m Manage an account\n4. -q Quit\n5. -h Help\n')
+
+    def choice_msg(self):
+        return input('Please choose what to do: ')
+
+    def get_fname_msg(self):
+        return input('Please enter your first name: ')
+
+    def get_lname_msg(self):
+        return input('Please enter your last name: ')
+
+    def add_success_msg(self):
+        print('Your account has been successfully created!')
 
 
 

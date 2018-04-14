@@ -71,5 +71,15 @@ class Model():
         if str(password) == str(self.tellers[teller]['Password']):
             return True
 
+    def pin_value_check(self, pin):
+        try:
+            pin = int(pin)
+        except ValueError:
+            return False
+
+    def check_length(self, expected_length, actual_length):
+        if actual_length == expected_length:
+            return True
+
 if __name__ == '__main__':
     m = Model()
