@@ -8,14 +8,17 @@ import json
 #confirm pin
 #managing accounts
 
+
 class Model():
 
     _NEXT_ACC_NUM = 1000000
+    _TABLE = "6,9,7,0,3,2,4,5,1,8"
 
     def __init__(self):
         self.filename = 'accounts.json'
         self.accounts = {}
         self.tellers = {}
+
 
     def write_file(self):
         with open(self.filename, 'w') as open_f:
@@ -41,8 +44,8 @@ class Model():
             if n < int(user):
                 n = int(user)
         acc_num = n + 1
-        self.accounts[acc_num] = {'PIN': pin, 'First Name': f_name, 'Last Name': l_name, 'Type': {'Chequing': {'Balance': 0, 'Transaction Log': []}, 'Savings': {'Balance':0, 'Transaction Log': []}}}
-        self.write_file()
+        self.accounts[acc_num] = {'PIN': self._encrypt(pin), 'First Name': f_name, 'Last Name': l_name, 'Type': {'Chequing': {'Balance': 0, 'Transaction Log': []}, 'Savings': {'Balance':0, 'Transaction Log': []}}}
+        self.write_file()git
 
 
     def del_account(self, acc_num):
@@ -85,5 +88,29 @@ class Model():
         if actual_length == expected_length:
             return True
 
+    def _encrypt(self, password):
+        answer = ""
+        stringed = str(password)
+        while len(stringed) > 0:
+            for pos in range(len(self._TABLE)):
+                if self._TABLE[pos] == stringed[-1]:
+                    equiv = str(self._TABLE[pos+2])
+            answer = answer + equiv
+            stringed = stringed[:-1]
+        return answer
+
+    def _decrypt(self, encrypted):
+        answer = ""
+        stringed = str(encrypted)
+        while len(stringed) > 0:
+            for pos in range(len(self._TABLE)):
+                if self._TABLE[pos] == stringed[-1]:
+                    equiv = str(self._TABLE[pos-2])
+            answer = answer + equiv
+            stringed = stringed[:-1]
+        return answer
+
 if __name__ == '__main__':
     m = Model()
+    print(m._encrypt("1234"))
+    print(m._decrypt("5248"))
