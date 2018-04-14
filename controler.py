@@ -109,6 +109,8 @@ class Controller():
     def gotoLogs(self):
         userlogs = self.bank_db.accounts[self.accNum]['Type'][self.accType]["Transaction Log"]
         string = ''
+        while len(userlogs) > 20:
+            userlogs.pop(0)
         for log in userlogs:
             string = string + '\n' + log
         if string == '':
