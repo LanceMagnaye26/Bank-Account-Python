@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/Bank-Account-Python.iml" filepath="$PROJECT_DIR$/.idea/Bank-Account-Python.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/.idea/FinalProject.iml" filepath="$PROJECT_DIR$/.idea/FinalProject.iml" />
->>>>>>> f655258e1a7801fe0f59c29661177cc4638e0682
     </modules>
   </component>
 </project>
