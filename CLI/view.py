@@ -4,54 +4,45 @@ class View():
         print('Please enter a number for your choice')
         return
 
-    def creating_account_msg(self):
-        print('Welcome to account creation')
-
-    def deleting_account_msg(self):
-        print('Welcome to account deletion')
-
-    def parameter_error_msg(self):
-        print('Missing parameter')
-
     def get_pin_msg(self):
         return input('Please enter a PIN: ')
+
+    def pin_confirm_msg(self):
+        return input('Please confirm your PIN: ')
 
     def pin_length_check_msg(self):
         print('Pin has to have length of 4')
 
     def inc_pin_msg(self):
-        print('Incorrect pin. Please run again!')
+        print('Incorrect pin. Please try again!')
 
-    def no_user_msg(self):
-        print('User does not exist')
-
-    def get_user_cred_msg(self):
+    def get_teller_cred_msg(self):
         return input('Enter user credentials: ')
 
-    def get_user_pass(self):
+    def get_teller_pass_msg(self):
         return input('Enter password: ')
 
-    def get_user_fname(self):
-        return input('Enter your first name: ')
+    def wrong_pass_msg(self):
+        print('Wrong password! Please try again!')
 
-    def get_user_lname(self):
-        return input('Enter your last name: ')
-
-    def get_manager_id(self):
-        return input('Enter your ID: ')
-
-    def get_manager_password(self):
-        return int(input('Enter your password: '))
-
-    def get_acc_num(self):
-        return int(input('Enter an Account number: '))
+    def wrong_username_msg(self):
+        print('Wrong username! Please try again!')
 
     def main_menu(self):
-        print('Choose what you would like to do:\n'
-              '\t1. -c Create an account\n'
-              '\t2. -d Delete an account\n'
-              '\t3. -m Manage an account')
-        return input()
+        print('\nCommands:\n1. -c Create an account\n2. -d Delete an account\n3. -m Manage an account\n4. -q Quit\n5. -h Help\n')
+
+    def choice_msg(self):
+        return input('Please choose what to do: ')
+
+    def get_fname_msg(self):
+        return input('Please enter your first name: ')
+
+    def get_lname_msg(self):
+        return input('Please enter your last name: ')
+
+    def add_success_msg(self):
+        print('Your account has been successfully created!')
+
 
 
 if __name__ == "__main__":

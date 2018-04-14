@@ -1,15 +1,12 @@
 from view import View
-from model import Users
-from model2 import Managers
+from model import Model
 import sys
 
 
 class Controller():
     def __init__(self):
         self.view = View()
-        self.model = Users()
-        self.managers = Managers()
-        self.Users = Users()
+        self.model = Model()
 
     def pin_value_error_check(self):
         check = False
@@ -27,47 +24,34 @@ class Controller():
             except ValueError:
                 self.view.value_error_msg()
 
-    def check_length(self, expected_length, actual_length):
-        if actual_length != expected_length:
-            return False
 
     def run(self):
-        #get manager id and password
-        inp = self.view.get_manager_id()
-        if inp in self.managers.managers:
-            passinp = self.view.get_manager_password()
-            if passinp == self.managers.managers[inp]['Password']:
-                # loop
-                option = ''
-                while option != 'quit' and option != 'q':
-                    # show options
-                    option = self.view.main_menu()
-                    # user choses an option and it gets exicuted
-                    if option == '-n' or option == '1':
-                        self.view.creating_account_msg()
-                        fname = self.view.get_user_fname()
-                        lname = self.view.get_user_lname()
-                        pin = self.pin_value_error_check()
-                        self.model.add_account(fname, lname, pin)
-                    elif option == '-d' or option == '2':
-                        print(self.Users.accounts)
-                        # inp =
-                        self.view.deleting_account_msg()
-                        acc_num = str(self.view.get_acc_num())
-                        pin = self.pin_value_error_check()
-                        if acc_num in self.Users.accounts:
-                            if pin == self.Users.accounts[acc_num]['PIN']:
-                                self.model.del_account(acc_num)
-                            else:
-                                self.view.inc_pin_msg()
-                        else:
-                            self.view.no_user_msg()
-                    elif option == '-m' or option == '3':
-                        print('not implimented yet')
-            else:
-                self.view.inc_pin_msg()
-        else:
-            self.view.no_user_msg()
+        teller_cred = self.view.get_teller_cred_msg().title()
+        while teller_cred != 'q' or teller_cred != 'quit':
+            while self.model.no_teller_check(teller_cred) != True:
+                self.view.wrong_username_msg()
+                teller_cred = self.view.get_teller_cred_msg().title()
+            teller_pass = self.view.get_teller_pass_msg()
+            while self.model.teller_password_check(teller_cred, teller_pass) != True:
+                self.view.wrong_pass_msg()
+                teller_pass = self.view.get_teller_pass_msg()
+            self.view.main_menu()
+            inp = self.view.choice_msg()
+            while inp != '-q':
+                if inp == '-c':
+                    fname = self.view.get_fname_msg()
+                    lname = self.view.get_lname_msg()
+                    pin = self.view.get_pin_msg()
+                    while self.model.pin_value_check(pin) == False:
+                        self.view.value_error_msg()
+                        pin = self.view.get_pin_msg()
+                        while self.model.check_length(pin) != True:
+                            self.view.pin_length_check_msg()
+                            pin = self.view.get_pin_msg()
+                    self.model.add_account(fname, lname, pin)
+                    self.view.add_success_msg()
+                self.view.main_menu()
+                inp = self.view.choice_msg()
 
 
 
