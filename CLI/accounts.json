@@ -1,1 +1,1 @@
-{"2": {"PIN": 1234, "First Name": "Nam", "Last Name": "Tran", "Type": {"Chequing": {"Balance": 0, "Transaction Log": []}, "Savings": {"Balance": 0, "Transaction Log": []}}}}
+{"2": {"PIN": 1234, "First Name": "Nam", "Last Name": "Tran", "Type": {"Chequing": {"Balance": -200, "Transaction Log": ["Deposited 200"]}, "Savings": {"Balance": 4595, "Transaction Log": ["Deposited 4835", "Withdrew 20", "Withdrew 20", "Withdrew 200"]}}}}
