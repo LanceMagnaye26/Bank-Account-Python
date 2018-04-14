@@ -38,8 +38,6 @@ class Controller():
             self.view.main_menu()
             inp = self.view.choice_msg()
             while inp != '-q':
-                self.view.main_menu()
-                inp = self.view.choice_msg()
                 if inp == '-c':
                     fname = self.view.get_fname_msg()
                     lname = self.view.get_lname_msg()
@@ -51,7 +49,9 @@ class Controller():
                             self.view.pin_length_check_msg()
                             pin = self.view.get_pin_msg()
                     self.model.add_account(fname, lname, pin)
-
+                    self.view.add_success_msg()
+                self.view.main_menu()
+                inp = self.view.choice_msg()
 
 
 

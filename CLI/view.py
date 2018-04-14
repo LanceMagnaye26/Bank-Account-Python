@@ -40,6 +40,9 @@ class View():
     def get_lname_msg(self):
         return input('Please enter your last name: ')
 
+    def add_success_msg(self):
+        print('Your account has been successfully created!')
+
 
 
 if __name__ == "__main__":
