@@ -7,7 +7,7 @@ import os
 
 class Controller():
     def __init__(self, master, bank_db):
-        self.TABLE = "6,9,7,0,3,2,4,5,1,8"
+        self.TABLE = "6,9,7,0,3,2,4,5,1,8,6,9"
         self.master = master
         self.bank_db = bank_db
         self.bank_gui = ATM(master)

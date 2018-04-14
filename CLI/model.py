@@ -1,12 +1,12 @@
 import json
 from chequing import Chequing
 import random
+
 #transaction log
 
 class Model():
 
     _NEXT_ACC_NUM = 1000000
-    # _TABLE = "6,9,7,0,3,2,4,5,1,8"
 
     def __init__(self):
         self.filename = 'accounts.json'
