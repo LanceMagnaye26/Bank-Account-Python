@@ -8,7 +8,6 @@ import json
 class Model():
     def __init__(self):
         #super().__init__()
-        self.fieldnames = ['First Name', 'Last Name', 'Account Number', 'PIN', 'Balance']
         self.accounts = {}
 
     def makeNew(self , name, bal):

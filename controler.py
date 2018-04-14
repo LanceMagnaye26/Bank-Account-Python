@@ -27,12 +27,9 @@ class Controller():
 
     def Password(self):
         try:
-
             pin = int(self.bank_gui.passInp.get())
-            passwd = self.bank_db.accounts[self.accNum]["PIN"]
-            thing = int()
-            print(thing)
-            if pin == thing:
+            passwd = int(self.bank_db.accounts[self.accNum]["PIN"]) / int(self.bank_db.accounts[self.accNum]["key"])
+            if pin == passwd:
                 self.gotoAcounts()
                 self.user = self.bank_db.accounts[self.accNum]
             else:
@@ -47,7 +44,7 @@ class Controller():
             self.bank_db.accounts[self.accNum]['Type'][self.accType]['Transaction Log'].append('Deposited {}'.format(money))
             self.gotoFinish('Deposited {} into {}'.format(money, self.accType))
         except ValueError:
-            messagebox.showinfo("Error",'plese enter a number')
+            messagebox.showinfo("Error: please enter a number")
 
     def Withdraw(self, amount):
         #can go up to -500
