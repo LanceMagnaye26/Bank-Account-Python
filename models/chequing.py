@@ -9,7 +9,6 @@ class Chequing(Account):
         super().__init__(name, acc_bal)
 
     def withdraw(self, amount):
-        global checker
         try:
             if amount < 0:
                 print('Error: Amount has to be larger than 0')

@@ -38,7 +38,7 @@ class View:
         print('\nCommands:\n1. -c Create an account\n2. -d Delete an account\n3. -m Manage an account\n4. -q Quit\n5. -h Help')
 
     def manage_acc_menu(self):
-        print('\nCommands:\n1. -d Deposit\n2. -w Withdraw\n3. -q Quit\n4. -h Help')
+        print('\nCommands:\n1. -d Deposit\n2. -w Withdraw\n3. -s Show transaction log\n4. -q Quit\n5. -h Help')
 
     def choice_msg(self):
         return input('\nPlease choose what to do: ')
@@ -83,5 +83,6 @@ class View:
     def help_mng_acc_menu(self):
         print('\nPress -d to deposit money into this account.'
               '\nPress -w to withdraw money from this account. Overdraft up to $500 for Savings account type.'
+              '\nPress -s to show transaction log of the account'
               '\nPress -q to quit managing account section and return to main menu.'
               '\nPress -h for help and instructions.')

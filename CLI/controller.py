@@ -82,8 +82,12 @@ class Controller:
                             pass
                         elif inp2 == '-w':
                             pass
+                        elif inp2 == '-s':
+                            pass
                         elif inp2 == '-h':
                             self.view.help_mng_acc_menu()
+                        else:
+                            self.view.invalid_choice_msg()
                         inp2 = self.view.get_acc_mng()
                 elif inp == '-h':
                     self.view.help_main_menu()
