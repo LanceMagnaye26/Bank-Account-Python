@@ -1,11 +1,12 @@
 import json
 from chequing import Chequing
+import random
 #transaction log
 
 class Model():
 
     _NEXT_ACC_NUM = 1000000
-    _TABLE = "6,9,7,0,3,2,4,5,1,8"
+    # _TABLE = "6,9,7,0,3,2,4,5,1,8"
 
     def __init__(self):
         self.filename = 'accounts.json'
@@ -37,7 +38,7 @@ class Model():
             if n < int(user):
                 n = int(user)
         acc_num = n + 1
-        self.accounts[acc_num] = {'PIN': self._encrypt(pin), 'First Name': f_name.title(), 'Last Name': l_name.title(), 'Type': {'Chequing': {'Balance': 0, 'Transaction Log': []}, 'Savings': {'Balance':0, 'Transaction Log': []}}}
+        self.accounts[acc_num] = {'PIN': self._encrypt(pin)[0], 'First Name': f_name.title(), 'Last Name': l_name.title(), 'Type': {'Chequing': {'Balance': 0, 'Transaction Log': []}, 'Savings': {'Balance':0, 'Transaction Log': []}}}
         self.write_file()
 
 
@@ -91,29 +92,46 @@ class Model():
         if pin == self._decrypt(self.accounts[acc_num]['PIN']):
             return True
 
-    def _encrypt(self, password):
-        answer = ""
-        stringed = str(password)
-        while len(stringed) > 0:
-            for pos in range(len(self._TABLE)):
-                if self._TABLE[pos] == stringed[-1]:
-                    equiv = str(self._TABLE[pos+2])
-            answer = answer + equiv
-            stringed = stringed[:-1]
-        return answer
+    def deposit_chequing(self, name, amount):
+        self.read_file()
+        account = Chequing(name)
+        account.deposit(amount)
+        pass
 
-    def _decrypt(self, encrypted):
-        answer = ""
-        stringed = str(encrypted)
-        while len(stringed) > 0:
-            for pos in range(len(self._TABLE)):
-                if self._TABLE[pos] == stringed[-1]:
-                    equiv = str(self._TABLE[pos-2])
-            answer = answer + equiv
-            stringed = stringed[:-1]
-        return answer
+    def _encrypt(self, pin):
+        rand = random.randint(17,42)
+        hashed_pin = int(pin)*rand
+        return (hashed_pin, rand)
+
+    def _decrypt(self, pin_and_num):
+        pin = int(pin_and_num[0])/int(pin_and_num[1])
+        return int(pin)
+
+    # def _encrypt(self, password):
+    #     answer = ""
+    #     stringed = str(password)
+    #     while len(stringed) > 0:
+    #         for pos in range(len(self._TABLE)):
+    #             if self._TABLE[pos] == stringed[-1]:
+    #                 equiv = str(self._TABLE[pos+2])
+    #         answer = answer + equiv
+    #         stringed = stringed[:-1]
+    #     return answer
+    #
+    # def _decrypt(self, encrypted):
+    #     answer = ""
+    #     stringed = str(encrypted)
+    #     while len(stringed) > 0:
+    #         for pos in range(len(self._TABLE)):
+    #             if self._TABLE[pos] == stringed[-1]:
+    #                 equiv = str(self._TABLE[pos-2])
+    #         answer = answer + equiv
+    #         stringed = stringed[:-1]
+    #     return answer
 
 if __name__ == '__main__':
     m = Model()
-    print(m._encrypt("1234"))
-    print(m._decrypt("5248"))
+    the_tuple = m._encrypt(1234)
+    print("The hashed password is", the_tuple[0])
+    print("The password is", m._decrypt(the_tuple))
+
