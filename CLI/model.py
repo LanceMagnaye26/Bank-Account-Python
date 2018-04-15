@@ -1,6 +1,6 @@
 import json
-from models.chequing import Chequing
-from models.savings import Savings
+from chequing import Chequing
+from savings import Savings
 
 import random
 
@@ -135,13 +135,18 @@ class Model():
 
     def withdraw_savings(self, acc_num, amount, name):
         self.read_file()
-        account = Chequing(name)
+        account = Savings(name)
         account.acc_bal = self.accounts[acc_num]['Type']['Chequing']['Balance']
         if account.withdraw(amount) == True:
             self.accounts[acc_num]['Type']['Savings']['Balance'] = account.acc_bal
             one_log = '{} ${} on {}'.format(account.transaction_log[0][0][0], account.transaction_log[0][0][1], account.transaction_log[0][1])
             self.accounts[acc_num]['Type']['Savings']['Transaction Log'].append(one_log)
             self.write_file()
+            return True
+
+    def no_account_check(self):
+        self.read_file()
+        if len(self.accounts) == 0:
             return True
 
     def get_balance(self, acc_num, type):

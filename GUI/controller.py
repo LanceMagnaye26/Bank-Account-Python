@@ -1,4 +1,5 @@
-from GUI.view import ATM
+from view import ATM
+from time import gmtime, strftime
 
 from tkinter import *
 from tkinter import messagebox
@@ -38,37 +39,40 @@ class Controller():
 
     def Deposit(self):
         try:
-            money = int(self.bank_gui.money_box.get())
+            money = float(self.bank_gui.money_box.get())
             self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] += money
-            self.bank_db.accounts[self.accNum]['Type'][self.accType]['Transaction Log'].append('Deposited {}'.format(money))
+            self.bank_db.accounts[self.accNum]['Type'][self.accType]['Transaction Log'].append('Deposited {} on {}'.format(money, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
             self.gotoFinish('Deposited {} into {}'.format(money, self.accType))
         except ValueError:
             messagebox.showinfo("Error", "Error: please enter a number")
 
     def Withdraw(self, amount):
-        #can go up to -500
-        if self.accType == 'Chequing':
-            if self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] - amount > -500:
-                self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] -= amount
-                self.bank_db.accounts[self.accNum]['Type'][self.accType]['Transaction Log'].append(
-                    'Withdrew {}'.format(amount))
-                self.gotoFinish('Withdrew {} from {}'.format(amount, self.accType))
-        #can go down to 0
-        #withdrawing below 1000 gives 10$ fee
-        else:
-            if self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] < amount:
-                messagebox.showinfo("Error",'not enough funds')
-            elif self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] - amount < 1000:
-                messagebox.showinfo("Error",'funds bellow 1000, $10 fee charges')
-                self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] -= amount + 10
-                self.bank_db.accounts[self.accNum]['Type'][self.accType]['Transaction Log'].append(
-                    'Withdrew {}'.format(amount))
-                self.gotoFinish('Withdrew {} from Savings, $10 fee was charged'.format(amount))
+        try:
+            amount = float(amount)
+            if self.accType == 'Chequing':
+                if self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] - amount > -500:
+                    self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] -= amount
+                    self.bank_db.accounts[self.accNum]['Type'][self.accType]['Transaction Log'].append(
+                        'Withdrew {} on {}'.format(amount, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
+                    self.gotoFinish('Withdrew {} from {}'.format(amount, self.accType))
+                else:
+                    messagebox.showinfo("Error", 'not enough funds')
             else:
-                self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] -= amount
-                self.bank_db.accounts[self.accNum]['Type'][self.accType]['Transaction Log'].append(
-                    'Withdrew {}'.format(amount))
-                self.gotoFinish('Withdrew {} from Savings'.format(amount))
+                if self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] < amount:
+                    messagebox.showinfo("Error",'not enough funds')
+                elif self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] - amount < 1000:
+                    messagebox.showinfo("Error",'funds bellow 1000, $10 fee charges')
+                    self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] -= amount + 10
+                    self.bank_db.accounts[self.accNum]['Type'][self.accType]['Transaction Log'].append(
+                        'Withdrew {} on {}'.format(amount, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
+                    self.gotoFinish('Withdrew {} from Savings on {}, $10 fee was charged'.format(amount, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
+                else:
+                    self.bank_db.accounts[self.accNum]['Type'][self.accType]['Balance'] -= amount
+                    self.bank_db.accounts[self.accNum]['Type'][self.accType]['Transaction Log'].append(
+                        'Withdrew {} on {}'.format(amount, strftime("%Y-%m-%d %H:%M:%S", gmtime())))
+                    self.gotoFinish('Withdrew {} from Savings'.format(amount))
+        except ValueError:
+            messagebox.showinfo("Error", "Error: please enter a number")
 
     def Savings(self):
         self.accType = 'Savings'

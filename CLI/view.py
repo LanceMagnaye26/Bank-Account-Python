@@ -2,6 +2,9 @@ class View:
     def value_error_msg(self):
         print('\nPlease enter a number for your choice')
 
+    def no_account_msg(self):
+        print('\nThere is currenly no account in the database')
+
     def get_pin_msg(self):
         return input('\nPlease enter a PIN: ')
 
@@ -92,8 +95,13 @@ class View:
     def show_balance(self, amount):
         print('The current balance of the account is {}'.format(amount))
 
-    def show_transaction(self, log):
-        print('Transaction Log\n{}'.format(log))
+    def show_transaction(self, logs):
+        if logs == []:
+            print('\nNo transaction has been made')
+        else:
+            print('')
+            for log in logs:
+                print(log)
 
     def get_acc_num(self):
         return input('\nPlease enter an account number: ')
