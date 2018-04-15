@@ -1,4 +1,4 @@
-from savings import Savings
+from models.savings import Savings
 from datetime import datetime, timedelta
 
 class TermSavings(Savings):

@@ -1,7 +1,7 @@
-.idea/
-__pycache__/
-views/.idea/
-views/__pycache__/
+CLI/.idea/
+CLI/__pycache__/
+GUI/.idea/
+GUI/__pycache__/
 models/.idea/
 models/__pycache__/
 CLI/accounts.json

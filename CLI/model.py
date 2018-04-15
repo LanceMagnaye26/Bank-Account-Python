@@ -1,6 +1,6 @@
 import json
-from chequing import Chequing
-from savings import Savings
+from models.chequing import Chequing
+from models.savings import Savings
 
 import random
 

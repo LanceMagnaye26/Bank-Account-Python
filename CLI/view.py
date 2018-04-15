@@ -1,4 +1,3 @@
-
 class View:
     def value_error_msg(self):
         print('\nPlease enter a number for your choice')

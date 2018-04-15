@@ -1,5 +1,5 @@
-from view import View
-from model import Model
+from CLI.view import View
+from CLI.model import Model
 
 
 class Controller:

@@ -1,5 +1,5 @@
-from account import Account
-from transaction_log import TransactionLog
+from models.account import Account
+from models.transaction_log import TransactionLog
 
 class Chequing(Account):
 
