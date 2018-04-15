@@ -1,6 +1,6 @@
 from tkinter import *
-from GUI.controller import Controller
-from GUI.model import Model
+from controller import Controller
+from model import Model
 
 
 def main():

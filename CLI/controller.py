@@ -1,5 +1,6 @@
 from view import View
 from model import Model
+import sys
 
 
 class Controller:
@@ -135,6 +136,7 @@ class Controller:
                     self.view.invalid_choice_msg()
                 self.view.main_menu()
                 inp = self.view.choice_msg()
+            sys.exit(0)
 
 
 

@@ -1,4 +1,5 @@
-from CLI.controller import Controller
+from controller import Controller
+
 def Main():
     c = Controller()
     c.run()
